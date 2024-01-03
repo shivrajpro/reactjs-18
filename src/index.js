@@ -58,6 +58,7 @@ function Header() {
 
 function Menu() {
     const pizzas = [...pizzaData];
+    const numPizzas = pizzaData.length
     // const len = 0;
     return (
         <div className="menu">
@@ -66,29 +67,32 @@ function Menu() {
 
             {/* {len && <p>we have pizzas</p>} */}
             {/* {len > 0 && <p>we have pizzas</p>} */}
-            <ul className="pizzas">
-                {pizzas.length ?
-                    pizzaData.map(p => {
-                        return <Pizza key={p.name} pizzaObj={p} />
-                    })
-                    :
-                    <p>no pizza present</p>
-                }
-            </ul>
+
+            {/* React.Fragment is used if we want to pass the key prop*/}
+            {numPizzas ? (
+                <>
+                    <p>please select the pizza from list</p>
+                    <ul className="pizzas" >
+                        {pizzas.map(pizza => {
+                            return <Pizza key={pizza.photoName} pizzaObj={pizza} />
+                        })}
+                    </ul>
+                </>
+            ) : <p>No pizzas found</p>}
 
         </div>
     )
 }
 
 function Pizza({ pizzaObj }) {
-    console.log(pizzaObj);
+    // console.log(pizzaObj);
     return (
-        <li className="pizza" >
+        <li className={`pizza  ${pizzaObj.soldOut ? 'sold-out':''} `} >
             <img src={pizzaObj.photoName} alt={pizzaObj.name} />
             <div>
                 <h3>{pizzaObj.name}</h3>
                 <p>{pizzaObj.ingredients}</p>
-                <span> {pizzaObj.price} </span>
+                <span> {pizzaObj.soldOut ? 'SOLD OUT' : pizzaObj.price} </span>
             </div>
         </li>
     )
