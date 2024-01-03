@@ -58,7 +58,7 @@ function Header() {
 
 function Menu() {
     const pizzas = [...pizzaData];
-    const len = 0;
+    // const len = 0;
     return (
         <div className="menu">
             <h2>Our Menu</h2>
@@ -70,7 +70,7 @@ function Menu() {
                 {pizzas.length ?
                     pizzaData.map(p => {
                         return <Pizza key={p.name} pizzaObj={p} />
-                    }) 
+                    })
                     :
                     <p>no pizza present</p>
                 }
@@ -80,14 +80,15 @@ function Menu() {
     )
 }
 
-function Pizza(props) {
+function Pizza({ pizzaObj }) {
+    console.log(pizzaObj);
     return (
         <li className="pizza" >
-            <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+            <img src={pizzaObj.photoName} alt={pizzaObj.name} />
             <div>
-                <h3>{props.pizzaObj.name}</h3>
-                <p>{props.pizzaObj.ingredients}</p>
-                <span> {props.pizzaObj.price} </span>
+                <h3>{pizzaObj.name}</h3>
+                <p>{pizzaObj.ingredients}</p>
+                <span> {pizzaObj.price} </span>
             </div>
         </li>
     )
@@ -95,23 +96,28 @@ function Pizza(props) {
 
 function Footer() {
     const currentHours = new Date().getHours();
-    const openHour = 12;
+    const openHour = 6;
     const closedHour = 23;
 
     const isOpen = currentHours >= openHour && currentHours <= closedHour
 
-    if(!isOpen) return <p>we are closed!</p>
+    if (!isOpen) return <p>we are closed!</p>
     return (
         isOpen && (
-            <div className="order" >
-                <p>We are open until {closedHour}:00, Come
-                    and visit us or order online
-                </p>
-                <button className="btn">Order</button>
-            </div>
+            <Order closedHour={closedHour} openHour={openHour} />
         )
     )
 }
+
+function Order({ closedHour, openHour }) {
+    return <div className="order">
+        <p>We are open from {openHour}:00 to {closedHour}:00
+        </p>
+        <p>Come and visit us or order online</p>
+        <button className="btn">Order</button>
+    </div>;
+}
+
 function App() {
     //can write function Pizza here. Nested components
     return (
