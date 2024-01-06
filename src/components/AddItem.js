@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function AddItem(props) {
+export default function AddItem({ addItem }) {
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(0);
@@ -10,11 +10,10 @@ export default function AddItem(props) {
     if (name === '') return;
     const item = { name, quantity, price, id: Date.now() };
     console.log(item);
+    addItem(item);
     setName('');
     setQuantity(1);
     setPrice(0);
-
-    props.itemAdded(item);
   }
 
   return (
@@ -36,7 +35,7 @@ export default function AddItem(props) {
           </select>
         </div>
         <div>
-          <label>Price</label>
+          <label>Price per Quantity</label>
           <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>
 

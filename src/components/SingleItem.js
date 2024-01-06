@@ -1,10 +1,13 @@
-export default function SingleItem(props) {
-    // console.log('SingleItem',props);
+export default function SingleItem({ item, deleteItem }) {
     return (
-        <div key={props.item.id} className="item">
-            <div>{props.item.name}</div>
-            <div>{props.item.quantity}</div>
-            <div>$ {props.item.price}</div>
+      <div className="item">
+        <div>{item.name}</div>
+        <div>{item.quantity}</div>
+        <div>${item.price}</div>
+        <div>${item.price * item.quantity}</div>
+        <div className="close" onClick={() => deleteItem(item.id)}>
+          X
         </div>
+      </div>
     );
-}
+  }

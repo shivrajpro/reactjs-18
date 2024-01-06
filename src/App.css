@@ -14,11 +14,11 @@ body {
 }
 
 .header {
-  padding: 2rem 0;
+  padding: 0.5rem 0;
   background-color: lightcoral;
   text-align: center;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.25rem;
 }
 
 .footer {
@@ -27,9 +27,9 @@ body {
   background-color: yellow;
   left: 0;
   right: 0;
-  padding: 2rem 0;
+  padding: 0.5rem 0;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
@@ -58,4 +58,28 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.item > div {
+  flex: 1;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.item:nth-child(even) {
+  background-color: #bbb;
+}
+
+.item .close {
+  flex: 0.3;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.total {
+  text-align: end;
+  margin: 2rem 0;
+  font-weight: bold;
+  font-size: 20px;
 }
