@@ -1,7 +1,7 @@
-export default function Tab(props) {
+export default function Tab({ tab, tabIndex, currTab }) {
   return (
-    <div>
-      <h1> {props.tab.title} </h1>
+    <div className={`heading ${tabIndex === currTab ? "active" : ""}`}>
+      {tab.title}
       {/* <p> {props.tab.description} </p> */}
     </div>
   );

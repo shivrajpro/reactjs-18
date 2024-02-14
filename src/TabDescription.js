@@ -1,7 +1,3 @@
-export default function TabDescription({description}){
-    return (
-        <div className="description">
-            {description}
-        </div>
-    )
+export default function TabDescription(props) {
+  return <div className="description">{props.children}</div>;
 }

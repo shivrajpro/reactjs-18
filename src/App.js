@@ -9,17 +9,26 @@ function App() {
     { title: "second tab", description: "second description" },
     { title: "third tab", description: "third description" },
   ]);
+
+  const [currTab, setCurrTab] = useState(0);
+
+  const description = tabsData[currTab].description;
+
   return (
     <div className="tabs">
       <div className="tab-headings">
-        {tabsData.map((tab) => {
-          return <Tab key={Math.random()} tab={tab} />;
+        {tabsData.map((tab, index) => {
+          return (
+            <div key={Math.random()} onClick={() => setCurrTab(index)}>
+              <Tab tab={tab} tabIndex={index} currTab={currTab} />
+            </div>
+          );
         })}
       </div>
       <div>
-        {tabsData.map((tab) => {
-          return <TabDescription key={Math.random()} description={tab.description} />;
-        })}
+        <TabDescription>
+          {description}
+        </TabDescription>
       </div>
     </div>
   );
