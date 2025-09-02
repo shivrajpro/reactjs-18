@@ -1,11 +1,15 @@
+import BillDetails from "./BillDetails"
 
-const FriendsList = ({friends}) => {
+const FriendsList = ({ friends }) => {
     return (
         <div>
             <h3>Friends List</h3>
             <ul>
-                {friends.map((f)=>{
-                    return <li key={f.id}> {f.name} </li>
+                {friends.map((frnd) => {
+                    return <li key={frnd.id}>
+                        <h4> {frnd.name} </h4>
+                        <BillDetails frndName={frnd.name} details={frnd.billDetails} />
+                    </li>
                 })}
             </ul>
         </div>
