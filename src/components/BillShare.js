@@ -1,15 +1,15 @@
 import { useState } from "react"
 import Button from "./Button"
 
-const BillShare = ({friends, onBillPaid}) => {
-    const [selectedFriend, setselectedFriend] = useState();
-    const [bill, setBill]=useState();
+const BillShare = ({ friends, onBillPaid }) => {
+    const [selectedFriendId, setSelectedFriendId] = useState('');
+    const [billAmount, setBillAmount] = useState('');
 
     function submitBill(evt) {
         evt.preventDefault();
-        const theFriend = friends.find((fr)=>fr.id === +selectedFriend);
-        console.log('>> selectedFriend',theFriend);
-        const billDetails={friendId:theFriend.id, name:theFriend.name, bill};
+        const theFriend = friends.find((fr) => fr.id === +selectedFriendId);
+        console.log('>> selectedFriend', theFriend);
+        const billDetails = { friendId: theFriend.id, name: theFriend.name, billAmount };
         onBillPaid(billDetails);
     }
     return (
@@ -17,16 +17,16 @@ const BillShare = ({friends, onBillPaid}) => {
             <h3>Bill Share Details</h3>
             <form onSubmit={submitBill} >
                 <p>Select friend who paid the bill</p>
-                <select value={selectedFriend} onChange={(e)=>setselectedFriend(e.target.value)} >
+                <select value={selectedFriendId} onChange={(e) => setSelectedFriendId(e.target.value)} >
                     <option value='' >Select Friend</option>
-                    {friends.map((f)=>{
+                    {friends.map((f) => {
                         return <option key={f.id} value={f.id} > {f.name} </option>
                     })}
                 </select>
-                {selectedFriend}
+                {selectedFriendId}
                 <div>
                     <label>Bill Amount</label>
-                    <input placeholder="enter amount" value={bill} onChange={(e)=>setBill(e.target.value)} />
+                    <input placeholder="enter amount" value={billAmount} onChange={(e) => setBillAmount(e.target.value)} />
                 </div>
                 <div>
                     <Button>Add Bill</Button>
