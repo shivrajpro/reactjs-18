@@ -1,23 +1,27 @@
 import { useState } from "react"
+import Button from "./Button";
 
-export const AddFriend = ({setFriends}) => {
+export const AddFriend = ({onAddFriend}) => {
     const [name,setName]=useState('');
 
-    function onAddFriend(evt) {
+    function addFriend(evt) {
         evt.preventDefault();
-        setFriends(name);
+        if(name && name.length){
+            onAddFriend(name);
+            setName('');
+        }
     }
     return (
         <div>
             <h3>Add Friend</h3>
-            <form onSubmit={onAddFriend} >
+            <form onSubmit={addFriend} >
                 <div>
                     <label htmlFor="friendName" >Friend Name</label>
                     <input type="text" placeholder="enter name" id="friendName" onChange={(e)=>setName(e.target.value)} value={name} />
                 </div>
                 {/* {name} */}
                 <div>
-                    <button>Add Friend</button>
+                    <Button>Add Friend</Button>
                 </div>
             </form>
         </div>

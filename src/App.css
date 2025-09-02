@@ -1,0 +1,21 @@
+.btn {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Space inside btn */
+  font-size: 16px; /* Text size */
+  font-weight: 500; /* Slightly bold text */
+  border: none; /* Remove default border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.btn:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+  transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+.btn:active {
+  background-color: #3e8e41; /* Darker shade on click */
+  transform: translateY(0); /* Reset lift */
+}
