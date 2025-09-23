@@ -1,70 +1,61 @@
+import { useState } from "react";
 import "./styles.css";
-import { useEffect, useState } from "react";
 
-const PAGE_SIZE = 10;
 export default function App() {
-  const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1);
-  const fetchProducts = async () => {
-    const res = await fetch("https://dummyjson.com/products");
-    const data = await res.json();
+  const [cost, setCost] = useState();
+  const [interest, setInterest] = useState();
+  const [fee, setFee] = useState();
+  const [downPayment, setDownpayment] = useState();
+  const [emi, setEmi] = useState();
 
-    // console.log(data);
-    if (data && data.products) setProducts(data.products);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  console.log("products", products);
-
-  const selectedPageHandler = (selectedPage) => {
-    if (selectedPage >= 1 && selectedPage <= products.length / PAGE_SIZE)
-      setPage(selectedPage);
-  };
   return (
     <div className="App">
-      {products.length > 0 && (
-        <div className="products">
-          {products
-            .slice(page * PAGE_SIZE - PAGE_SIZE, page * PAGE_SIZE)
-            .map((prod) => {
-              return (
-                <div key={prod.id} className="product-details">
-                  <div>
-                    <img
-                      className="product-image"
-                      width={100}
-                      height={100}
-                      src={prod.thumbnail}
-                      alt={prod.title}
-                    />
-                  </div>
-                  <span>{prod.title}</span>
-                </div>
-              );
-            })}
-        </div>
-      )}
+      <h2>EMI Calculator</h2>
 
-      {products.length > 0 && (
-        <div className="pagination">
-          <span onClick={() => selectedPageHandler(page - 1)}>◀️</span>
-          {[...Array(products.length / PAGE_SIZE)].map((_, i) => {
-            return (
-              <span
-                onClick={() => selectedPageHandler(i + 1)}
-                key={i}
-                className={page === i + 1 ? "page-selected" : ""}
-              >
-                {i + 1}
-              </span>
-            );
-          })}
-          <span onClick={() => selectedPageHandler(page + 1)}>▶️</span>
-        </div>
-      )}
+      <label htmlFor="cost">Total Cost</label>
+      <input
+        type="number"
+        id="cost"
+        placeholder="Enter total cost of asset"
+        value={cost}
+        onChange={(e) => setCost(e.target.value)}
+      />
+      <label htmlFor="interest">Interest Rate (in %)</label>
+      <input
+        type="number"
+        id="interest"
+        placeholder="Enter interest rate in %"
+        value={interest}
+        onChange={(e) => setInterest(e.target.value)}
+      />
+      <label htmlFor="fee">Processing Fee (in %)</label>
+      <input
+        type="number"
+        id="fee"
+        placeholder="Enter processing fee in %"
+        value={fee}
+        onChange={(e) => setFee(e.target.value)}
+      />
+      <label htmlFor="downpayment">Down Payment</label>
+      <input
+        type="range"
+        id="downpayment"
+        value={downPayment}
+        onChange={(e) => setDownpayment(e.target.value)}
+        min={0}
+        max={cost}
+      />
+      <label htmlFor="emi">Loan per month</label>
+      <input
+        type="range"
+        id="emi"
+        onChange={(e) => setEmi(e.target.value)}
+        value={emi}
+        min={0}
+        max={cost}
+      />
+
+      <span>Tenure</span>
     </div>
   );
 }

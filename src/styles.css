@@ -1,41 +1,7 @@
 .App {
     font-family: sans-serif;
-    text-align: center;
-}
-
-.products {
+    padding: 40px;
     display: flex;
-    width: 500px;
-    flex-flow: row wrap;
+    flex-direction: column;
     gap: 12px;
-    margin: 20px 0;
-}
-
-.product-details {
-    border: 1px solid lightgray;
-    border-radius: 8px;
-    height: 150px;
-    width: 150px;
-    /* background-color: red; */
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.product-details .product-image {
-    object-fit: cover;
-}
-
-.pagination {
-    margin: 20px;
-    justify-content: center;
-    align-items: center;
-}
-
-.pagination span {
-    border: 1px solid gray;
-    padding: 16px 20px;
-    cursor: pointer;
-}
-
-.pagination .page-selected {
-    background-color: lightgray;
 }
