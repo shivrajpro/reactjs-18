@@ -1,7 +1,36 @@
 .App {
     font-family: sans-serif;
-    padding: 40px;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding: 40px;
+}
+
+.slider {
+    width: 100%;
+}
+
+.labels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tenure {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tenure-btn {
+    width: 84px;
+    height: 48px;
+    padding: 0px;
+    font-size: 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.tenure-btn.selected {
+    background-color: skyblue;
 }
