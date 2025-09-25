@@ -17,6 +17,8 @@ export default function App() {
     setDownpayment(dp.toFixed(0));
 
     // calculate emi and update it
+    const newEmi = calculateEMI(dp);
+    setEmi(newEmi);
   };
 
   const updateDownpayment = (e) => {
@@ -26,8 +28,33 @@ export default function App() {
     setEmi(emi.toFixed(0));
 
     // calculate downpayment and update it
+    const newDp = calculateDP(emi);
+    setDownpayment(newDp);
   };
-  const calculateEMI = () => { };
+
+  const calculateEMI = (newDownpayment) => {
+    // EMI amount = [P x R x (1+R)^N]/[(1+R)^N-1]
+    if (!cost) return;
+
+    const loanAmt = cost - newDownpayment;
+    const rateOfInterest = interest / 100;
+    const numOfYears = tenure / 12;
+
+    const yearlyPayment =
+      (loanAmt * rateOfInterest * (1 + rateOfInterest) ** numOfYears) /
+      (1 + rateOfInterest) ** (numOfYears - 1);
+
+    const EMI = yearlyPayment / 12;
+
+    return Number(EMI).toFixed(0);
+  };
+
+  const calculateDP = (newEmi) => {
+    if (!cost) return;
+
+    const downPaymentPercent = 100 - (emi / calculateEMI(0)) * 100;
+    return Number((downPaymentPercent / 100) * cost).toFixed(0);
+  };
 
   return (
     <div className="App">
